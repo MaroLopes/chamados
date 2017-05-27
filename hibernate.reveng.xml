@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="chamadosmtt"/>
+  <table-filter match-name="acesso"/>
+  <table-filter match-name="usuario_has_chamado"/>
+  <table-filter match-name="mails_envio"/>
+  <table-filter match-name="chamado"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="documentos_chamado"/>
+  <table-filter match-name="model_relat_fotos"/>
+  <table-filter match-name="relat_chamado_fotos"/>
+  <table-filter match-name="relat_chamado"/>
+  <table-filter match-name="model_relat_itens"/>
+  <table-filter match-name="model_relat"/>
+</hibernate-reverse-engineering>

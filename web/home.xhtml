@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">               
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>MTT Sistemas</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <h:form>
+            <p:growl id="messages" showDetail="true"/>
+                <p:layout fullPage="true" >
+                    <p:layoutUnit position="north" footer="MTT Sistemas"  
+                                  resizable="false" closable="false" collapsible="false" style="text-align: center">
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="south" size="auto" resizable="false" closable="true" collapsible="true" style="text-align: center; font-size: 12px">
+                        <!-- Inclui o conteúdo do arquivo de Rodapé -->
+                        <form>
+                            <ui:include src="footer.xhtml"> </ui:include>
+                        </form>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="west" size="auto" header="MENU" collapsible="true" style="font-size: 12px">
+                        
+<!--                        <p:panel id="menu" style="border: none; padding: 0px">-->
+                            <p:menu toggleable="true">
+                                
+                                <p:submenu label="Home">
+                                    <p:menuitem value="Usuários" icon="ui-icon-person" actionListener="#{acessoBean.setLocal('usuario/usuarioteste.xhtml')}" immediate="true" update="content">
+                                    </p:menuitem>
+                                                
+                                                
+                                    <p:menuitem value="Chamados" icon="ui-icon-script" actionListener="#{acessoBean.setLocal('chamado/chamadoteste.xhtml')}" update="content"/>
+                                    <p:menuitem value="Acessos" icon="ui-icon-unlocked" actionListener="#{acessoBean.setLocal('acesso/acessoteste.xhtml')}" update="content" />
+                                </p:submenu>
+                                
+                                <p:submenu label="Apontamentos">
+                                        <p:menuitem value="Listar apontamentos" icon="ui-icon-note" url="" />
+                                        <p:menuitem value="Criar apontamento" icon="ui-icon-document-b" url="" />
+                                </p:submenu>
+                                
+                                <p:submenu label="Sistema">
+                                    <p:menuitem value="Seus dados" icon="ui-icon-gear" url="" />
+                                    <p:menuitem value="Home" icon="ui-icon-power" actionListener="#{acessoBean.setLocal('dashboard.xhtml')}" update="content"/>
+                                    <p:menuitem value="Sair" icon="ui-icon-power" url="/" />
+                                </p:submenu>
+                                
+                            </p:menu>
+                        <!--</p:panel>-->
+                        
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center" id="conteudo" style="font-size: 12px">
+                        
+                        <p:panel id="content" style="border: none; padding: 0px">
+                            <!--inclui conteudo-->
+                            <ui:include src="#{acessoBean.local}"></ui:include>
+                        </p:panel>
+                        
+                    </p:layoutUnit>
+                </p:layout>
+            </h:form>
+        </h:body>
+    </f:view>
+</html>
+
