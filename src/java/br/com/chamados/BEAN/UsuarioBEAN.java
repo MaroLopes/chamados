@@ -17,6 +17,9 @@ import javax.faces.context.FacesContext;
 @ManagedBean (name="usuarioBean")
 @RequestScoped
 public class UsuarioBEAN {
+    
+    private String firstname;
+    private String lastname;
 
     /**
      * Creates a new instance of UsuarioBEAN
@@ -34,5 +37,24 @@ public class UsuarioBEAN {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+    
+    
+    
     
 }

@@ -7,6 +7,7 @@ package br.com.chamados.DAO;
 
 
 import br.com.chamados.VO.Chamado;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -85,12 +86,29 @@ public class ChamadoDAO extends dao{
         
         try {
             
-            Query q =  em.createQuery("select object (u) from Chamado as u");
+            Query q =  em.createQuery("select object (c) from Chamado as c");
             lista = q.getResultList();
             
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ERRO",  e.getMessage()));
             em.close();
+        }
+        
+        return lista;
+    }
+    
+    public List<Chamado> GetData(Date data){
+        EntityManager em = getEntityManager();
+        List<Chamado> lista = null;
+        
+        try {
+            
+            Query q =  em.createQuery("select object (c) from Agenda as a where c.chamadoData = :data").setParameter("data", data);
+            lista = q.getResultList();
+            
+        } catch (Exception e) {
+            em.close();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ERRO",  e.getMessage()));
         }
         
         return lista;

@@ -14,7 +14,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean (name="acessoBean")
 @SessionScoped
-public class AcessoBEAN {
+public class AcessoBEAN implements java.io.Serializable {
     
     private String local = "dashboard.xhtml";
     private String cabecalho = "Home";
@@ -23,7 +23,8 @@ public class AcessoBEAN {
      * Creates a new instance of AcessoBEAN
      */
     public AcessoBEAN() {
-//        local = "dashboard.xhtml";
+        local = "dashboard.xhtml";
+        cabecalho = "Home";
     }
 
     public String getLocal() {
@@ -42,5 +43,11 @@ public class AcessoBEAN {
         this.cabecalho = cabecalho;
     }
     
+    public void chamaTela(String loc, String cab){
+        
+        setLocal(loc);
+        setCabecalho(cab);
+        
+    }
     
 }
