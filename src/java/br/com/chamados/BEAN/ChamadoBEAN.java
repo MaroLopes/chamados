@@ -110,7 +110,7 @@ public class ChamadoBEAN implements java.io.Serializable {
         
         try {
             if (selectedChamados.isEmpty()) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Deleta:", "Selecione chamados para deleta-los"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletar:", "Selecione um ou mais chamados para deleta-los!"));
             }else{
                 for (Chamado c : selectedChamados) {
                     ChamadoDAO dao = new ChamadoDAO();
@@ -130,7 +130,7 @@ public class ChamadoBEAN implements java.io.Serializable {
             
             ChamadoDAO dao = new ChamadoDAO();
             dao.update(chamado);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização:", "Agenda atualizada com sucesso!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização:", "Chamado atualizado com sucesso!"));
         } catch (Exception e) {
             
         }
@@ -142,9 +142,9 @@ public class ChamadoBEAN implements java.io.Serializable {
         options.put("resizable", true);
         options.put("draggable", true);
         options.put("modal", true);
-        options.put("width", 640);
+        options.put("width", 800);
         options.put("height", 550);
-        options.put("closable", false);
+        options.put("closable", true);
         options.put("contentWidth", "100%");
         options.put("contentHeight", "100%");
         chamado = new Chamado();
@@ -168,7 +168,7 @@ public class ChamadoBEAN implements java.io.Serializable {
             chamado = selectedChamados.get(0);
             RequestContext.getCurrentInstance().openDialog("chamado/form_novo_chamado", options, null);
         }else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Selecionar:", "Selecione uma Agenda a ser Editada!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Selecionar:", "Selecione um chamado a ser Editada!"));
         }
         
     }
@@ -179,7 +179,7 @@ public class ChamadoBEAN implements java.io.Serializable {
         
     }
     
-        public void closeDialog() {
+    public void closeDialog() {
         RequestContext.getCurrentInstance().closeDialog(this);
     }
     

@@ -6,7 +6,7 @@
 package br.com.chamados.VO;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -43,12 +44,14 @@ public class ModelRelatItens implements Serializable {
     @Basic(optional = false)
     @Column(name = "model_relat_itens_id")
     private Integer modelRelatItensId;
+    @Size(max = 100)
     @Column(name = "model_relat_itens_desc")
     private String modelRelatItensDesc;
+    @Size(max = 100)
     @Column(name = "model_relat_itens_exemplo")
     private String modelRelatItensExemplo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "modelRelatItensModelRelatItensId")
-    private Collection<ModelRelatFotos> modelRelatFotosCollection;
+    private List<ModelRelatFotos> modelRelatFotosList;
     @JoinColumn(name = "model_relat_model_relat_id", referencedColumnName = "model_relat_id")
     @ManyToOne(optional = false)
     private ModelRelat modelRelatModelRelatId;
@@ -85,12 +88,12 @@ public class ModelRelatItens implements Serializable {
     }
 
     @XmlTransient
-    public Collection<ModelRelatFotos> getModelRelatFotosCollection() {
-        return modelRelatFotosCollection;
+    public List<ModelRelatFotos> getModelRelatFotosList() {
+        return modelRelatFotosList;
     }
 
-    public void setModelRelatFotosCollection(Collection<ModelRelatFotos> modelRelatFotosCollection) {
-        this.modelRelatFotosCollection = modelRelatFotosCollection;
+    public void setModelRelatFotosList(List<ModelRelatFotos> modelRelatFotosList) {
+        this.modelRelatFotosList = modelRelatFotosList;
     }
 
     public ModelRelat getModelRelatModelRelatId() {

@@ -6,7 +6,7 @@
 package br.com.chamados.VO;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -44,15 +46,18 @@ public class RelatChamado implements Serializable {
     @Column(name = "relat_chamado_id")
     private Integer relatChamadoId;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "relat_chamado_desc")
     private String relatChamadoDesc;
+    @Size(max = 100)
     @Column(name = "relat_chamado_info")
     private String relatChamadoInfo;
     @JoinColumn(name = "chamado_chamado_id", referencedColumnName = "chamado_id")
     @ManyToOne(optional = false)
     private Chamado chamadoChamadoId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "relatChamadoRelatChamadoId")
-    private Collection<RelatChamadoFotos> relatChamadoFotosCollection;
+    private List<RelatChamadoFotos> relatChamadoFotosList;
 
     public RelatChamado() {
     }
@@ -99,12 +104,12 @@ public class RelatChamado implements Serializable {
     }
 
     @XmlTransient
-    public Collection<RelatChamadoFotos> getRelatChamadoFotosCollection() {
-        return relatChamadoFotosCollection;
+    public List<RelatChamadoFotos> getRelatChamadoFotosList() {
+        return relatChamadoFotosList;
     }
 
-    public void setRelatChamadoFotosCollection(Collection<RelatChamadoFotos> relatChamadoFotosCollection) {
-        this.relatChamadoFotosCollection = relatChamadoFotosCollection;
+    public void setRelatChamadoFotosList(List<RelatChamadoFotos> relatChamadoFotosList) {
+        this.relatChamadoFotosList = relatChamadoFotosList;
     }
 
     @Override

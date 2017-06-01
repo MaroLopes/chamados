@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <f:view contentType="text/html">
+    <f:view  contentType="text/html">
         
         <h:head>
             <f:facet name="first">
@@ -17,28 +17,28 @@
 
         <h:body>
             
-                
+            
                 <p:layout fullPage="true" >
                     <p:layoutUnit position="north" footer="MTT Sistemas"  
                                   resizable="false" closable="false" collapsible="false" style="text-align: center">
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="south" size="auto" resizable="false" closable="true" collapsible="true" style="text-align: center; font-size: 12px">
+                    <p:layoutUnit position="south" size="auto" resizable="false" closable="false" collapsible="false" style="text-align: center; font-size: 12px">
                         <!-- Inclui o conteúdo do arquivo de Rodapé -->
                         <form>
                             <ui:include src="footer.xhtml"> </ui:include>
                         </form>
                     </p:layoutUnit>
 
-                    <p:layoutUnit position="west" size="auto" header="MENU" collapsible="true" style="font-size: 12px">
-                        <h:form>
-<!--                        <p:panel id="menu" style="border: none; padding: 0px">-->
+                    <p:layoutUnit position="west" size="auto" header="MENU" style="font-size: 12px">
+                        <h:form id="form_menu">
+                            
                             <p:menu toggleable="true">
                                 
                                 <p:submenu label="Home">
                                     <p:menuitem value="Usuários" icon="ui-icon-person" actionListener="#{acessoBean.chamaTela('usuario/usuario_home.xhtml', 'Usuários')}" update=":form:content">
                                     </p:menuitem>
-                                    <p:menuitem value="Chamados" icon="ui-icon-script" actionListener="#{acessoBean.chamaTela('chamado/chamado_home.xhtml', 'Chamados')}" update=":form"/>
+                                    <p:menuitem value="Chamados" icon="ui-icon-script" actionListener="#{acessoBean.chamaTela('chamado/chamado_home.xhtml', 'Chamados')}" update=":form:content"/>
                                     <p:menuitem value="Acessos" icon="ui-icon-unlocked" actionListener="#{acessoBean.chamaTela('acesso/acessoteste.xhtml', 'Acessos/Permissões')}" update=":form:content" />
                                 </p:submenu>
                                 
@@ -49,7 +49,7 @@
                                 
                                 <p:submenu label="Sistema">
                                     <p:menuitem value="Seus dados" icon="ui-icon-gear" url="" />
-                                    <p:menuitem value="Home" icon="ui-icon-power" actionListener="#{acessoBean.setLocal('dashboard.xhtml')}" update=":form:content"/>
+                                    <p:menuitem value="Home" icon="ui-icon-power" actionListener="#{acessoBean.chamaTela('dashboard.xhtml', 'Home')}" update=":form:content"/>
                                     <p:menuitem value="Sair" icon="ui-icon-power" url="/" />
                                 </p:submenu>
                                 
@@ -60,7 +60,8 @@
 
                     <p:layoutUnit position="center" id="conteudo" style="font-size: 12px">
                         <h:form id="form">
-                            <p:growl id="messages" showDetail="true" autoUpdate="true"/>
+                            <!--<p:growl id="messages" showDetail="true" autoUpdate="true"/>-->
+                            <!--<p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />-->
                             <p:panel id="content" style="border: none; padding: 0px" header="#{acessoBean.cabecalho}">
                                 <!--inclui conteudo-->
                                 <ui:include src="#{acessoBean.local}"></ui:include>
@@ -70,6 +71,7 @@
                 </p:layout>
             
         </h:body>
+        
     </f:view>
 </html>
 

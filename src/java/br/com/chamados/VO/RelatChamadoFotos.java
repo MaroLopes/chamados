@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -40,6 +42,8 @@ public class RelatChamadoFotos implements Serializable {
     @Column(name = "relat_chamado_fotos_id")
     private Integer relatChamadoFotosId;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "relat_chamado_fotos_desc")
     private String relatChamadoFotosDesc;
     @Lob

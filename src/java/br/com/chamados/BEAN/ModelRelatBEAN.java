@@ -12,7 +12,7 @@ import javax.faces.bean.RequestScoped;
  *
  * @author mlopes
  */
-@ManagedBean
+@ManagedBean (name="modelRelatBEAN")
 @RequestScoped
 public class ModelRelatBEAN {
 

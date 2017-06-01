@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        
+    <h:head>
+        <h:outputStylesheet name="main/css/showcase.css" />
+        <h:outputStylesheet name="main/css/sh.css" />
+        
+        <style type="text/css">
+            .ui-layout-north {
+                z-index:20 !important;
+                overflow:visible !important;;
+            }
+            .ui-layout-north .ui-layout-unit-content {
+                overflow:visible !important;
+            }
+            
+            body {
+                background-color: #FFFFFF;
+            }
+        </style>
+	</h:head>
+
+        <h:body>
+
+            <p:panelGrid style="margin-top:20px">
+    
+ 
+    <p:row>
+        <p:column style="font-weight: bold;">Seattle</p:column>
+        <p:column style="font-weight: bold;">4</p:column>
+ 
+        <p:column rowspan="2" style="font-weight: bold;">Seattle</p:column>
+        <p:column rowspan="2" style="font-weight: bold;">4</p:column>
+ 
+        <p:column rowspan="5">Seattle</p:column>
+        <p:column rowspan="5">2</p:column>
+ 
+        <p:column rowspan="11" style="font-weight: bold;">Chicago</p:column>
+    </p:row>
+ 
+    <p:row>
+        <p:column>Houston</p:column>
+        <p:column >0</p:column>
+    </p:row>
+ 
+    <p:row>
+        <p:column colspan="4" styleClass="ui-widget-header">
+            <p:spacer height="0"/>
+        </p:column>
+    </p:row>
+ 
+    <p:row>
+        <p:column style="font-weight: bold;">Utah</p:column>
+        <p:column style="font-weight: bold;">4</p:column>
+ 
+        <p:column rowspan="2">Utah</p:column>
+        <p:column rowspan="2">3</p:column>
+    </p:row>
+ 
+    <p:row>
+        <p:column>San Antonio</p:column>
+        <p:column >2</p:column>
+    </p:row>
+ 
+    <p:row>
+        <p:column colspan="6" styleClass="ui-widget-header">
+            <p:spacer height="0"/>
+        </p:column>
+    </p:row>
+ 
+    <p:row>
+        <p:column style="font-weight: bold;">Chicago</p:column>
+        <p:column style="font-weight: bold;">4</p:column>
+ 
+        <p:column rowspan="2" style="font-weight: bold;">Chicago</p:column>
+        <p:column rowspan="2" style="font-weight: bold;">4</p:column>
+ 
+        <p:column rowspan="5" style="font-weight: bold;">Chicago</p:column>
+        <p:column rowspan="5" style="font-weight: bold;">4</p:column>
+    </p:row>
+ 
+    <p:row>
+        <p:column>New York</p:column>
+        <p:column >1</p:column>
+    </p:row>
+ 
+   
+ 
+   
+ 
+    
+ 
+ 
+    
+</p:panelGrid>
+
+        </h:body>
+
+    </f:view>
+    
+    
+</html>

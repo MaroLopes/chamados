@@ -48,12 +48,12 @@ public class ChamadoDAO extends dao{
         
         try {
             
-            em.getTransaction().begin();
-            Chamado c = em.find(Chamado.class, chamado.getChamadoId());
-            
-            c.setChamadoCidade(chamado.getChamadoCidade());
-            
-            em.getTransaction().commit();
+//            em.getTransaction().begin();
+//            Chamado c = em.find(Chamado.class, chamado.getChamadoId());
+//            
+//            c.setChamadoCidade(chamado.getChamadoCidade());
+//            
+//            em.getTransaction().commit();
             
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ERRO",  e.getMessage()));
@@ -103,7 +103,7 @@ public class ChamadoDAO extends dao{
         
         try {
             
-            Query q =  em.createQuery("select object (c) from Agenda as a where c.chamadoData = :data").setParameter("data", data);
+            Query q =  em.createQuery("select object (c) from Chamado as c where c.chamadoData = :data").setParameter("data", data);
             lista = q.getResultList();
             
         } catch (Exception e) {

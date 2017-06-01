@@ -6,8 +6,10 @@
 package br.com.chamados.VO;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,6 +44,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByUsuarioMail", query = "SELECT u FROM Usuario u WHERE u.usuarioMail = :usuarioMail"),
     @NamedQuery(name = "Usuario.findByUsuarioPassword", query = "SELECT u FROM Usuario u WHERE u.usuarioPassword = :usuarioPassword"),
     @NamedQuery(name = "Usuario.findByUsuarioStatus", query = "SELECT u FROM Usuario u WHERE u.usuarioStatus = :usuarioStatus"),
+    @NamedQuery(name = "Usuario.findByUsuarioDataCriacao", query = "SELECT u FROM Usuario u WHERE u.usuarioDataCriacao = :usuarioDataCriacao"),
+    @NamedQuery(name = "Usuario.findByUsuarioCriacao", query = "SELECT u FROM Usuario u WHERE u.usuarioCriacao = :usuarioCriacao"),
+    @NamedQuery(name = "Usuario.findByUsuarioDataUpdate", query = "SELECT u FROM Usuario u WHERE u.usuarioDataUpdate = :usuarioDataUpdate"),
+    @NamedQuery(name = "Usuario.findByUsuarioUpdate", query = "SELECT u FROM Usuario u WHERE u.usuarioUpdate = :usuarioUpdate"),
     @NamedQuery(name = "Usuario.findByFuncFuncId", query = "SELECT u FROM Usuario u WHERE u.funcFuncId = :funcFuncId")})
 public class Usuario implements Serializable {
 
@@ -48,29 +59,51 @@ public class Usuario implements Serializable {
     private Integer usuarioId;
     @Column(name = "usuario_matricula_ensel")
     private Integer usuarioMatriculaEnsel;
-    @Basic(optional = false)
+    @Size(max = 200)
     @Column(name = "usuario_nome_completo")
     private String usuarioNomeCompleto;
+    @Size(max = 11)
     @Column(name = "usuario_mobile")
-    private Integer usuarioMobile;
+    private String usuarioMobile;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "usuario_nickname")
     private String usuarioNickname;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "usuario_mail")
     private String usuarioMail;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 64)
     @Column(name = "usuario_password")
     private String usuarioPassword;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "usuario_status")
     private boolean usuarioStatus;
+    @Column(name = "usuario_data_criacao")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date usuarioDataCriacao;
+    @Size(max = 100)
+    @Column(name = "usuario_criacao")
+    private String usuarioCriacao;
+    @Column(name = "usuario_data_update")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date usuarioDataUpdate;
+    @Size(max = 100)
+    @Column(name = "usuario_update")
+    private String usuarioUpdate;
     @Column(name = "func_func_id")
     private Integer funcFuncId;
-    @ManyToMany(mappedBy = "usuarioCollection")
-    private Collection<Acesso> acessoCollection;
-    @ManyToMany(mappedBy = "usuarioCollection")
-    private Collection<Chamado> chamadoCollection;
+    @ManyToMany(mappedBy = "usuarioList")
+    private List<Acesso> acessoList;
+    @ManyToMany(mappedBy = "usuarioList")
+    private List<Chamado> chamadoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioUsuarioId")
+    private List<MailsEnvio> mailsEnvioList;
 
     public Usuario() {
     }
@@ -79,9 +112,8 @@ public class Usuario implements Serializable {
         this.usuarioId = usuarioId;
     }
 
-    public Usuario(Integer usuarioId, String usuarioNomeCompleto, String usuarioNickname, String usuarioMail, String usuarioPassword, boolean usuarioStatus) {
+    public Usuario(Integer usuarioId, String usuarioNickname, String usuarioMail, String usuarioPassword, boolean usuarioStatus) {
         this.usuarioId = usuarioId;
-        this.usuarioNomeCompleto = usuarioNomeCompleto;
         this.usuarioNickname = usuarioNickname;
         this.usuarioMail = usuarioMail;
         this.usuarioPassword = usuarioPassword;
@@ -112,11 +144,11 @@ public class Usuario implements Serializable {
         this.usuarioNomeCompleto = usuarioNomeCompleto;
     }
 
-    public Integer getUsuarioMobile() {
+    public String getUsuarioMobile() {
         return usuarioMobile;
     }
 
-    public void setUsuarioMobile(Integer usuarioMobile) {
+    public void setUsuarioMobile(String usuarioMobile) {
         this.usuarioMobile = usuarioMobile;
     }
 
@@ -152,6 +184,38 @@ public class Usuario implements Serializable {
         this.usuarioStatus = usuarioStatus;
     }
 
+    public Date getUsuarioDataCriacao() {
+        return usuarioDataCriacao;
+    }
+
+    public void setUsuarioDataCriacao(Date usuarioDataCriacao) {
+        this.usuarioDataCriacao = usuarioDataCriacao;
+    }
+
+    public String getUsuarioCriacao() {
+        return usuarioCriacao;
+    }
+
+    public void setUsuarioCriacao(String usuarioCriacao) {
+        this.usuarioCriacao = usuarioCriacao;
+    }
+
+    public Date getUsuarioDataUpdate() {
+        return usuarioDataUpdate;
+    }
+
+    public void setUsuarioDataUpdate(Date usuarioDataUpdate) {
+        this.usuarioDataUpdate = usuarioDataUpdate;
+    }
+
+    public String getUsuarioUpdate() {
+        return usuarioUpdate;
+    }
+
+    public void setUsuarioUpdate(String usuarioUpdate) {
+        this.usuarioUpdate = usuarioUpdate;
+    }
+
     public Integer getFuncFuncId() {
         return funcFuncId;
     }
@@ -161,21 +225,30 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Acesso> getAcessoCollection() {
-        return acessoCollection;
+    public List<Acesso> getAcessoList() {
+        return acessoList;
     }
 
-    public void setAcessoCollection(Collection<Acesso> acessoCollection) {
-        this.acessoCollection = acessoCollection;
+    public void setAcessoList(List<Acesso> acessoList) {
+        this.acessoList = acessoList;
     }
 
     @XmlTransient
-    public Collection<Chamado> getChamadoCollection() {
-        return chamadoCollection;
+    public List<Chamado> getChamadoList() {
+        return chamadoList;
     }
 
-    public void setChamadoCollection(Collection<Chamado> chamadoCollection) {
-        this.chamadoCollection = chamadoCollection;
+    public void setChamadoList(List<Chamado> chamadoList) {
+        this.chamadoList = chamadoList;
+    }
+
+    @XmlTransient
+    public List<MailsEnvio> getMailsEnvioList() {
+        return mailsEnvioList;
+    }
+
+    public void setMailsEnvioList(List<MailsEnvio> mailsEnvioList) {
+        this.mailsEnvioList = mailsEnvioList;
     }
 
     @Override

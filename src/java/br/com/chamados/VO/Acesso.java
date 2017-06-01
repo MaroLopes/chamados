@@ -6,7 +6,7 @@
 package br.com.chamados.VO;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -33,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Acesso.findAll", query = "SELECT a FROM Acesso a"),
     @NamedQuery(name = "Acesso.findByAcessoId", query = "SELECT a FROM Acesso a WHERE a.acessoId = :acessoId"),
     @NamedQuery(name = "Acesso.findByAcessoNome", query = "SELECT a FROM Acesso a WHERE a.acessoNome = :acessoNome"),
+    @NamedQuery(name = "Acesso.findByAcessoStatus", query = "SELECT a FROM Acesso a WHERE a.acessoStatus = :acessoStatus"),
     @NamedQuery(name = "Acesso.findByAcessoArquivo", query = "SELECT a FROM Acesso a WHERE a.acessoArquivo = :acessoArquivo")})
 public class Acesso implements Serializable {
 
@@ -42,15 +44,19 @@ public class Acesso implements Serializable {
     @Basic(optional = false)
     @Column(name = "acesso_id")
     private Integer acessoId;
+    @Size(max = 100)
     @Column(name = "acesso_nome")
     private String acessoNome;
+    @Column(name = "acesso_status")
+    private Boolean acessoStatus;
+    @Size(max = 100)
     @Column(name = "acesso_arquivo")
     private String acessoArquivo;
     @JoinTable(name = "acesso_has_usuario", joinColumns = {
         @JoinColumn(name = "acesso_acesso_id", referencedColumnName = "acesso_id")}, inverseJoinColumns = {
         @JoinColumn(name = "usuario_usuario_id", referencedColumnName = "usuario_id")})
     @ManyToMany
-    private Collection<Usuario> usuarioCollection;
+    private List<Usuario> usuarioList;
 
     public Acesso() {
     }
@@ -75,6 +81,14 @@ public class Acesso implements Serializable {
         this.acessoNome = acessoNome;
     }
 
+    public Boolean getAcessoStatus() {
+        return acessoStatus;
+    }
+
+    public void setAcessoStatus(Boolean acessoStatus) {
+        this.acessoStatus = acessoStatus;
+    }
+
     public String getAcessoArquivo() {
         return acessoArquivo;
     }
@@ -84,12 +98,12 @@ public class Acesso implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
+    public List<Usuario> getUsuarioList() {
+        return usuarioList;
     }
 
-    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
+    public void setUsuarioList(List<Usuario> usuarioList) {
+        this.usuarioList = usuarioList;
     }
 
     @Override
