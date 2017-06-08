@@ -125,7 +125,7 @@ public class Chamado implements Serializable {
     @JoinColumn(name = "model_relat_model_relat_id", referencedColumnName = "model_relat_id")
     @ManyToOne
     private ModelRelat modelRelatModelRelatId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chamadoChamadoId")
+    @OneToMany(mappedBy = "chamadoChamadoId")
     private List<DocumentosChamado> documentosChamadoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "chamadoChamadoId")
     private List<RelatChamado> relatChamadoList;

@@ -6,13 +6,11 @@
 package br.com.chamados.DAO;
 
 import br.com.chamados.VO.DocumentosChamado;
-import br.com.chamados.VO.MailsEnvio;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.swing.text.Document;
 
 /**
  *
@@ -27,6 +25,7 @@ public class DocumentosChamadoDAO extends dao {
             em.getTransaction().begin();
             em.persist(documentosEnvio);
             em.getTransaction().commit();
+            em.close();
             
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ERRO",  e.getMessage()));
@@ -36,7 +35,7 @@ public class DocumentosChamadoDAO extends dao {
         
     }
     
-    public DocumentosChamado getByChamado(int idDocumentosChamado){
+    public DocumentosChamado getByDocumento(int idDocumentosChamado){
         EntityManager em = getEntityManager();
         
         return em.find(DocumentosChamado.class, idDocumentosChamado);

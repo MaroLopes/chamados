@@ -4,105 +4,23 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-
-    <f:view contentType="text/html">
         
     <h:head>
-        <h:outputStylesheet name="main/css/showcase.css" />
-        <h:outputStylesheet name="main/css/sh.css" />
         
-        <style type="text/css">
-            .ui-layout-north {
-                z-index:20 !important;
-                overflow:visible !important;;
-            }
-            .ui-layout-north .ui-layout-unit-content {
-                overflow:visible !important;
-            }
-            
-            body {
-                background-color: #FFFFFF;
-            }
-        </style>
 	</h:head>
 
         <h:body>
 
-            <p:panelGrid style="margin-top:20px">
-    
- 
-    <p:row>
-        <p:column style="font-weight: bold;">Seattle</p:column>
-        <p:column style="font-weight: bold;">4</p:column>
- 
-        <p:column rowspan="2" style="font-weight: bold;">Seattle</p:column>
-        <p:column rowspan="2" style="font-weight: bold;">4</p:column>
- 
-        <p:column rowspan="5">Seattle</p:column>
-        <p:column rowspan="5">2</p:column>
- 
-        <p:column rowspan="11" style="font-weight: bold;">Chicago</p:column>
-    </p:row>
- 
-    <p:row>
-        <p:column>Houston</p:column>
-        <p:column >0</p:column>
-    </p:row>
- 
-    <p:row>
-        <p:column colspan="4" styleClass="ui-widget-header">
-            <p:spacer height="0"/>
-        </p:column>
-    </p:row>
- 
-    <p:row>
-        <p:column style="font-weight: bold;">Utah</p:column>
-        <p:column style="font-weight: bold;">4</p:column>
- 
-        <p:column rowspan="2">Utah</p:column>
-        <p:column rowspan="2">3</p:column>
-    </p:row>
- 
-    <p:row>
-        <p:column>San Antonio</p:column>
-        <p:column >2</p:column>
-    </p:row>
- 
-    <p:row>
-        <p:column colspan="6" styleClass="ui-widget-header">
-            <p:spacer height="0"/>
-        </p:column>
-    </p:row>
- 
-    <p:row>
-        <p:column style="font-weight: bold;">Chicago</p:column>
-        <p:column style="font-weight: bold;">4</p:column>
- 
-        <p:column rowspan="2" style="font-weight: bold;">Chicago</p:column>
-        <p:column rowspan="2" style="font-weight: bold;">4</p:column>
- 
-        <p:column rowspan="5" style="font-weight: bold;">Chicago</p:column>
-        <p:column rowspan="5" style="font-weight: bold;">4</p:column>
-    </p:row>
- 
-    <p:row>
-        <p:column>New York</p:column>
-        <p:column >1</p:column>
-    </p:row>
- 
-   
- 
-   
- 
-    
- 
- 
-    
-</p:panelGrid>
+            <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+                <p:graphicImage name="./resources/images/excel.png" />
+            </p:dialog>
+
+            <h:form>
+                <p:commandButton value="Download" ajax="false" actionListener="#{testeBEAN.teste()}" icon="ui-icon-arrowthick-1-s">
+                    <p:fileDownload value="#{testeBEAN.file}" />
+                </p:commandButton>
+            </h:form>
 
         </h:body>
-
-    </f:view>
-    
     
 </html>

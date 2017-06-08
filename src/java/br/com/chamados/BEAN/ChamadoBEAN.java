@@ -148,7 +148,7 @@ public class ChamadoBEAN implements java.io.Serializable {
         options.put("contentWidth", "100%");
         options.put("contentHeight", "100%");
         chamado = new Chamado();
-        RequestContext.getCurrentInstance().openDialog("chamado/form_novo_chamado", options, null);
+        RequestContext.getCurrentInstance().openDialog("chamado/chamado_form", options, null);
         
     }
     
@@ -166,9 +166,9 @@ public class ChamadoBEAN implements java.io.Serializable {
         
         if (selectedChamados.size() == 1) {
             chamado = selectedChamados.get(0);
-            RequestContext.getCurrentInstance().openDialog("chamado/form_novo_chamado", options, null);
+            RequestContext.getCurrentInstance().openDialog("chamado/chamado_form", options, null);
         }else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Selecionar:", "Selecione um chamado a ser Editada!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Selecionar:", "Selecione um chamado a ser editado!"));
         }
         
     }

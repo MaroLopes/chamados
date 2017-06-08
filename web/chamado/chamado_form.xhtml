@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
      
     <h:head>
-        <title>Novo Chamado</title>
+        <title>Chamado</title>
         <style type="text/css">
             .ui-widget {
                 font-size: 90%;
@@ -14,55 +15,93 @@
     </h:head>
      
     <h:body>
-        <i id="customheader" class="fa fa-fw fa-car" style="display:none"></i>
+
         <h:form>
             
-            <div class="ui-g">
-                <div class="ui-g-4">4</div>
-                <div class="ui-g-2">2</div>
-                <div class="ui-g-2">2</div>
-                
-            </div>
-            
-            <p:messages id="msg" showDetail="true" autoUpdate="true" closable="true" />
+            <p:growl id="msg" showDetail="true" autoUpdate="true"/>
             <p:panelGrid columns="4">
-  
-                <p:outputLabel value="OS: " />
-                <p:inputText id ="chamadoOs" value="#{chamadoBEAN.chamado.chamadoOs}"></p:inputText>
-                <p:outputLabel value="Orçamento: " />
-                <p:inputText id ="chamadoOrcamento" value="#{chamadoBEAN.chamado.chamadoOrcamento}"></p:inputText>
-                <p:outputLabel value="Data Agendamento: " />
-                <p:calendar id="chamadoData" value="#{chamadoBEAN.chamado.chamadoData}" pattern="dd/MM/yyyy" mask="true" locale="pt"/>
-                <p:outputLabel value="Hora Agendamento: " />
-                <p:calendar id="chamadoHora" value="#{chamadoBEAN.chamado.chamadoHora}" pattern="HH:mm" timeOnly="true"  mask="true"/>
-                <p:outputLabel value="Projeto: " />
-                <p:inputText id ="chamadoProjetoId" value="#{chamadoBEAN.chamado.chamadoProjetoId}"></p:inputText>
-                <p:outputLabel value="Cidade:  " />
-                <p:inputText id ="chamadoCidade" value="#{chamadoBEAN.chamado.chamadoCidade}"></p:inputText>
-                <p:outputLabel value="UF: " />
-                <p:inputText id ="chamadoUF" value="#{chamadoBEAN.chamado.chamadoUf}"></p:inputText>
-                <p:outputLabel value="Cliente Final: " />
-                <p:inputText id ="chamadoCliente" value="#{chamadoBEAN.chamado.chamadoClienteFinal}"></p:inputText>
+                <f:facet name="header">
+                    <p:outputLabel value="Chamado: #{chamadoBEAN.chamado.chamadoId}" />
+                </f:facet>
+                
                 <p:row>
-                <p:outputLabel value="GP Solicitante: " />
-                <p:inputText id ="chamadoSolicitante" value="#{chamadoBEAN.chamado.chamadoSolicitante}"></p:inputText>
+                    <p:outputLabel value="OS: " />
+                    <br/>
+                    <p:inputText id ="chamadoOs" value="#{chamadoBEAN.chamado.chamadoOs}"></p:inputText>
                 </p:row>
-                <p:outputLabel value="Descrição: " />
-                <p:inputTextarea rows="6" cols="50" id ="chamadoDesc" value="#{chamadoBEAN.chamado.chamadoDescricaoAtividade}"/>   
-                 
+                
+                <p:row>
+                    <p:outputLabel value="Orçamento: " />
+                    <br/>
+                    <p:inputText id ="chamadoOrcamento" value="#{chamadoBEAN.chamado.chamadoOrcamento}"></p:inputText>
+                </p:row>
+                
+                <p:row>
+                    <p:outputLabel value="Data Agendamento: " />
+                    <br/>
+                    <p:calendar id="chamadoData" value="#{chamadoBEAN.chamado.chamadoData}" pattern="dd/MM/yyyy" mask="true" locale="pt"/>
+                </p:row>
+                
+                <p:row>
+                    <p:outputLabel value="Hora Agendamento: " />
+                    <br/>
+                    <p:calendar id="chamadoHora" value="#{chamadoBEAN.chamado.chamadoHora}" pattern="HH:mm" timeOnly="true"  mask="true"/>
+                </p:row>
+                
+                <p:row>
+                    <p:outputLabel value="Projeto: " />
+                    <br/>
+                    <p:inputText id ="chamadoProjetoId" value="#{chamadoBEAN.chamado.chamadoProjetoId}"></p:inputText>
+                </p:row>
+                
+                <p:row>
+                    <p:outputLabel value="Cidade:  " />
+                    <br/>
+                    <p:inputText id ="chamadoCidade" value="#{chamadoBEAN.chamado.chamadoCidade}"></p:inputText>
+                </p:row>
+                
+                <p:row>
+                    <p:outputLabel value="UF: " />
+                    <br/>
+                    <p:inputText id ="chamadoUF" value="#{chamadoBEAN.chamado.chamadoUf}"></p:inputText>
+                </p:row>
+                
+                <p:row>
+                    <p:outputLabel value="Cliente Final: " />
+                    <br/>
+                    <p:inputText id ="chamadoCliente" value="#{chamadoBEAN.chamado.chamadoClienteFinal}"></p:inputText>
+                </p:row>
+                
+                <p:row>
+                    <p:outputLabel value="GP Solicitante: " />
+                    <br/>
+                    <p:inputText id ="chamadoSolicitante" value="#{chamadoBEAN.chamado.chamadoSolicitante}"></p:inputText>
+                </p:row>
+                
+                <p:row>
+                    <p:outputLabel value="Operadora: " />
+                    <br/>
+                    <p:inputText id ="chamadoOperadora" value="#{chamadoBEAN.chamado.chamadoOperadora}"></p:inputText>
+                </p:row>
+                
+                <p:row>
+                    
+                    <h:outputLabel for="menu" value="Técnicos:" />
+                    <br/>
+                    <p:selectCheckboxMenu id="menu" value="#{checkboxView.selectedCities}" label="Cities"
+                                          filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                        <f:selectItems value="#{checkboxView.cities}" />
+                    </p:selectCheckboxMenu>
+                    
+                </p:row>
+                
             </p:panelGrid>
- 
-            chamado_cidade,
-            chamado_cliente_final,
-            chamado_data,
-            chamado_descricao_atividade,
-            chamado_hora,
-            chamado_orcamento,
-            chamado_os,
-            chamado_projeto_id,
-            chamado_solicitante,
-            chamado_uf,
-            model_relat_model_relat_id
+            
+            <p:outputLabel value="Descrição Atividade: " />
+            <br/>
+            <p:inputTextarea rows="6" cols="50" id ="chamadoDesc" value="#{chamadoBEAN.chamado.chamadoDescricaoAtividade}"/>
+            private Boolean chamadoStatusChamado;
+            private Boolean chamadoStatusAtividade;
             
         <br/><br/>
         
