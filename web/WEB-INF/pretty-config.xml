@@ -13,7 +13,7 @@
    
    <url-mapping id="home"> 
         <pattern value="/" /> 
-        <view-id value="/faces/home.xhtml" />
+        <view-id value="/faces/login.xhtml" />
     </url-mapping> 
    
    <!-- Begin UrlMappings 

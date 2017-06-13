@@ -17,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,8 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "MailsEnvio.findAll", query = "SELECT m FROM MailsEnvio m"),
     @NamedQuery(name = "MailsEnvio.findByMailsId", query = "SELECT m FROM MailsEnvio m WHERE m.mailsId = :mailsId"),
-    @NamedQuery(name = "MailsEnvio.findByMailsEnvioNome", query = "SELECT m FROM MailsEnvio m WHERE m.mailsEnvioNome = :mailsEnvioNome"),
-    @NamedQuery(name = "MailsEnvio.findByMailsEnvioEmail", query = "SELECT m FROM MailsEnvio m WHERE m.mailsEnvioEmail = :mailsEnvioEmail")})
+    @NamedQuery(name = "MailsEnvio.findByMailsEnvioDesc", query = "SELECT m FROM MailsEnvio m WHERE m.mailsEnvioDesc = :mailsEnvioDesc")})
 public class MailsEnvio implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,15 +39,8 @@ public class MailsEnvio implements Serializable {
     @Column(name = "mails_id")
     private Integer mailsId;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "mails_envio_nome")
-    private String mailsEnvioNome;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "mails_envio_email")
-    private String mailsEnvioEmail;
+    @Column(name = "mails_envio_desc")
+    private String mailsEnvioDesc;
     @JoinColumn(name = "usuario_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne(optional = false)
     private Usuario usuarioUsuarioId;
@@ -62,10 +52,9 @@ public class MailsEnvio implements Serializable {
         this.mailsId = mailsId;
     }
 
-    public MailsEnvio(Integer mailsId, String mailsEnvioNome, String mailsEnvioEmail) {
+    public MailsEnvio(Integer mailsId, String mailsEnvioDesc) {
         this.mailsId = mailsId;
-        this.mailsEnvioNome = mailsEnvioNome;
-        this.mailsEnvioEmail = mailsEnvioEmail;
+        this.mailsEnvioDesc = mailsEnvioDesc;
     }
 
     public Integer getMailsId() {
@@ -76,20 +65,12 @@ public class MailsEnvio implements Serializable {
         this.mailsId = mailsId;
     }
 
-    public String getMailsEnvioNome() {
-        return mailsEnvioNome;
+    public String getMailsEnvioDesc() {
+        return mailsEnvioDesc;
     }
 
-    public void setMailsEnvioNome(String mailsEnvioNome) {
-        this.mailsEnvioNome = mailsEnvioNome;
-    }
-
-    public String getMailsEnvioEmail() {
-        return mailsEnvioEmail;
-    }
-
-    public void setMailsEnvioEmail(String mailsEnvioEmail) {
-        this.mailsEnvioEmail = mailsEnvioEmail;
+    public void setMailsEnvioDesc(String mailsEnvioDesc) {
+        this.mailsEnvioDesc = mailsEnvioDesc;
     }
 
     public Usuario getUsuarioUsuarioId() {

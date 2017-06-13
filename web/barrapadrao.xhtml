@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:body>
+        <h:form>     
+            <p:growl id="mensagens" showDetail="true" />
+
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton type="button" value="Novo" icon="ui-icon-document" actionListener="#{mensagens.save}" update="mensagens"/>
+                    
+                    <p:commandButton type="button" value="Deletar" icon="ui-icon-close" actionListener="#{mensagens.delete}" onclick="PF('excluir').show();" update="mensagens" />
+                        <p:dialog header="Confirmação" widgetVar="excluir" modal="false" height="100" showEffect="fade" hideEffect="fade" >
+                            <h:outputText value="Deseja confirmar exclusão?" /> <br/>
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:dialog>
+                    
+                    <p:commandButton type="button" value="Alterar" icon="ui-icon-arrowrefresh-1-w" actionListener="#{mensagens.update}" update="mensagens" />
+                    
+                    <p:separator/>
+                    <p:commandButton type="button" value="Atualizar" icon="ui-icon-refresh" actionListener="#{mensagens.save}" update="mensagens"/>
+                </f:facet>
+            </p:toolbar>
+            
+        </h:form>
+        
+    </h:body>
+</html>

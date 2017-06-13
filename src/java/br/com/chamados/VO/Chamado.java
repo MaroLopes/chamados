@@ -6,8 +6,8 @@
 package br.com.chamados.VO;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,7 +26,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -48,15 +47,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Chamado.findByChamadoCidade", query = "SELECT c FROM Chamado c WHERE c.chamadoCidade = :chamadoCidade"),
     @NamedQuery(name = "Chamado.findByChamadoUf", query = "SELECT c FROM Chamado c WHERE c.chamadoUf = :chamadoUf"),
     @NamedQuery(name = "Chamado.findByChamadoClienteFinal", query = "SELECT c FROM Chamado c WHERE c.chamadoClienteFinal = :chamadoClienteFinal"),
-    @NamedQuery(name = "Chamado.findByChamadoSolicitante", query = "SELECT c FROM Chamado c WHERE c.chamadoSolicitante = :chamadoSolicitante"),
-    @NamedQuery(name = "Chamado.findByChamadoUsuarioCriacao", query = "SELECT c FROM Chamado c WHERE c.chamadoUsuarioCriacao = :chamadoUsuarioCriacao"),
-    @NamedQuery(name = "Chamado.findByChamadoDataCriacao", query = "SELECT c FROM Chamado c WHERE c.chamadoDataCriacao = :chamadoDataCriacao"),
-    @NamedQuery(name = "Chamado.findByChamadoUsuarioUpdate", query = "SELECT c FROM Chamado c WHERE c.chamadoUsuarioUpdate = :chamadoUsuarioUpdate"),
-    @NamedQuery(name = "Chamado.findByChamadoUsuarioDataUpdate", query = "SELECT c FROM Chamado c WHERE c.chamadoUsuarioDataUpdate = :chamadoUsuarioDataUpdate"),
-    @NamedQuery(name = "Chamado.findByChamadoStatusChamado", query = "SELECT c FROM Chamado c WHERE c.chamadoStatusChamado = :chamadoStatusChamado"),
-    @NamedQuery(name = "Chamado.findByChamadoStatusAtividade", query = "SELECT c FROM Chamado c WHERE c.chamadoStatusAtividade = :chamadoStatusAtividade"),
-    @NamedQuery(name = "Chamado.findByChamadoOperadora", query = "SELECT c FROM Chamado c WHERE c.chamadoOperadora = :chamadoOperadora"),
-    @NamedQuery(name = "Chamado.findByChamadoDeletado", query = "SELECT c FROM Chamado c WHERE c.chamadoDeletado = :chamadoDeletado")})
+    @NamedQuery(name = "Chamado.findByChamadoSolicitante", query = "SELECT c FROM Chamado c WHERE c.chamadoSolicitante = :chamadoSolicitante")})
 public class Chamado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,76 +56,71 @@ public class Chamado implements Serializable {
     @Basic(optional = false)
     @Column(name = "chamado_id")
     private Integer chamadoId;
-    @Size(max = 45)
+    @Basic(optional = false)
     @Column(name = "chamado_os")
     private String chamadoOs;
-    @Size(max = 45)
+    @Basic(optional = false)
     @Column(name = "chamado_orcamento")
     private String chamadoOrcamento;
+    @Basic(optional = false)
     @Column(name = "chamado_data")
     @Temporal(TemporalType.DATE)
     private Date chamadoData;
+    @Basic(optional = false)
     @Column(name = "chamado_hora")
     @Temporal(TemporalType.TIME)
     private Date chamadoHora;
-    @Size(max = 100)
+    @Basic(optional = false)
     @Column(name = "chamado_projeto_id")
     private String chamadoProjetoId;
-    @Size(max = 100)
+    @Basic(optional = false)
     @Column(name = "chamado_cidade")
     private String chamadoCidade;
-    @Size(max = 2)
+    @Basic(optional = false)
     @Column(name = "chamado_uf")
     private String chamadoUf;
-    @Size(max = 100)
+    @Basic(optional = false)
     @Column(name = "chamado_cliente_final")
     private String chamadoClienteFinal;
-    @Size(max = 100)
+    @Basic(optional = false)
     @Column(name = "chamado_solicitante")
     private String chamadoSolicitante;
+    @Basic(optional = false)
     @Lob
-    @Size(max = 2147483647)
     @Column(name = "chamado_descricao_atividade")
     private String chamadoDescricaoAtividade;
-    @Size(max = 100)
-    @Column(name = "chamado_usuario_criacao")
-    private String chamadoUsuarioCriacao;
-    @Column(name = "chamado_data_criacao")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date chamadoDataCriacao;
-    @Size(max = 100)
-    @Column(name = "chamado_usuario_update")
-    private String chamadoUsuarioUpdate;
-    @Column(name = "chamado_usuario_data_update")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date chamadoUsuarioDataUpdate;
-    @Column(name = "chamado_status_chamado")
-    private Boolean chamadoStatusChamado;
-    @Column(name = "chamado_status_atividade")
-    private Boolean chamadoStatusAtividade;
-    @Size(max = 100)
-    @Column(name = "chamado_operadora")
-    private String chamadoOperadora;
-    @Column(name = "chamado_deletado")
-    private Boolean chamadoDeletado;
     @JoinTable(name = "usuario_has_chamado", joinColumns = {
         @JoinColumn(name = "chamado_chamado_id", referencedColumnName = "chamado_id")}, inverseJoinColumns = {
         @JoinColumn(name = "usuario_usuario_id", referencedColumnName = "usuario_id")})
     @ManyToMany
-    private List<Usuario> usuarioList;
+    private Collection<Usuario> usuarioCollection;
     @JoinColumn(name = "model_relat_model_relat_id", referencedColumnName = "model_relat_id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private ModelRelat modelRelatModelRelatId;
-    @OneToMany(mappedBy = "chamadoChamadoId")
-    private List<DocumentosChamado> documentosChamadoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "chamadoChamadoId")
-    private List<RelatChamado> relatChamadoList;
+    private Collection<DocumentosChamado> documentosChamadoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chamadoChamadoId")
+    private Collection<RelatChamado> relatChamadoCollection;
 
     public Chamado() {
     }
 
     public Chamado(Integer chamadoId) {
         this.chamadoId = chamadoId;
+    }
+
+    public Chamado(Integer chamadoId, String chamadoOs, String chamadoOrcamento, Date chamadoData, Date chamadoHora, String chamadoProjetoId, String chamadoCidade, String chamadoUf, String chamadoClienteFinal, String chamadoSolicitante, String chamadoDescricaoAtividade) {
+        this.chamadoId = chamadoId;
+        this.chamadoOs = chamadoOs;
+        this.chamadoOrcamento = chamadoOrcamento;
+        this.chamadoData = chamadoData;
+        this.chamadoHora = chamadoHora;
+        this.chamadoProjetoId = chamadoProjetoId;
+        this.chamadoCidade = chamadoCidade;
+        this.chamadoUf = chamadoUf;
+        this.chamadoClienteFinal = chamadoClienteFinal;
+        this.chamadoSolicitante = chamadoSolicitante;
+        this.chamadoDescricaoAtividade = chamadoDescricaoAtividade;
     }
 
     public Integer getChamadoId() {
@@ -225,77 +211,13 @@ public class Chamado implements Serializable {
         this.chamadoDescricaoAtividade = chamadoDescricaoAtividade;
     }
 
-    public String getChamadoUsuarioCriacao() {
-        return chamadoUsuarioCriacao;
-    }
-
-    public void setChamadoUsuarioCriacao(String chamadoUsuarioCriacao) {
-        this.chamadoUsuarioCriacao = chamadoUsuarioCriacao;
-    }
-
-    public Date getChamadoDataCriacao() {
-        return chamadoDataCriacao;
-    }
-
-    public void setChamadoDataCriacao(Date chamadoDataCriacao) {
-        this.chamadoDataCriacao = chamadoDataCriacao;
-    }
-
-    public String getChamadoUsuarioUpdate() {
-        return chamadoUsuarioUpdate;
-    }
-
-    public void setChamadoUsuarioUpdate(String chamadoUsuarioUpdate) {
-        this.chamadoUsuarioUpdate = chamadoUsuarioUpdate;
-    }
-
-    public Date getChamadoUsuarioDataUpdate() {
-        return chamadoUsuarioDataUpdate;
-    }
-
-    public void setChamadoUsuarioDataUpdate(Date chamadoUsuarioDataUpdate) {
-        this.chamadoUsuarioDataUpdate = chamadoUsuarioDataUpdate;
-    }
-
-    public Boolean getChamadoStatusChamado() {
-        return chamadoStatusChamado;
-    }
-
-    public void setChamadoStatusChamado(Boolean chamadoStatusChamado) {
-        this.chamadoStatusChamado = chamadoStatusChamado;
-    }
-
-    public Boolean getChamadoStatusAtividade() {
-        return chamadoStatusAtividade;
-    }
-
-    public void setChamadoStatusAtividade(Boolean chamadoStatusAtividade) {
-        this.chamadoStatusAtividade = chamadoStatusAtividade;
-    }
-
-    public String getChamadoOperadora() {
-        return chamadoOperadora;
-    }
-
-    public void setChamadoOperadora(String chamadoOperadora) {
-        this.chamadoOperadora = chamadoOperadora;
-    }
-
-    public Boolean getChamadoDeletado() {
-        return chamadoDeletado;
-    }
-
-    public void setChamadoDeletado(Boolean chamadoDeletado) {
-        this.chamadoDeletado = chamadoDeletado;
-    }
-
     @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
+    public Collection<Usuario> getUsuarioCollection() {
+        return usuarioCollection;
     }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
+        this.usuarioCollection = usuarioCollection;
     }
 
     public ModelRelat getModelRelatModelRelatId() {
@@ -307,21 +229,21 @@ public class Chamado implements Serializable {
     }
 
     @XmlTransient
-    public List<DocumentosChamado> getDocumentosChamadoList() {
-        return documentosChamadoList;
+    public Collection<DocumentosChamado> getDocumentosChamadoCollection() {
+        return documentosChamadoCollection;
     }
 
-    public void setDocumentosChamadoList(List<DocumentosChamado> documentosChamadoList) {
-        this.documentosChamadoList = documentosChamadoList;
+    public void setDocumentosChamadoCollection(Collection<DocumentosChamado> documentosChamadoCollection) {
+        this.documentosChamadoCollection = documentosChamadoCollection;
     }
 
     @XmlTransient
-    public List<RelatChamado> getRelatChamadoList() {
-        return relatChamadoList;
+    public Collection<RelatChamado> getRelatChamadoCollection() {
+        return relatChamadoCollection;
     }
 
-    public void setRelatChamadoList(List<RelatChamado> relatChamadoList) {
-        this.relatChamadoList = relatChamadoList;
+    public void setRelatChamadoCollection(Collection<RelatChamado> relatChamadoCollection) {
+        this.relatChamadoCollection = relatChamadoCollection;
     }
 
     @Override

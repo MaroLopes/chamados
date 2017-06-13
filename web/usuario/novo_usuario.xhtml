@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        <title>MTT | Usuario</title>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <p:growl id="mensagens" />
+            <p:panel header="Cadastrar Novo Usuário" >
+                <h:panelGrid columns="4" cellpadding="8" style="font-weight:bold" >
+
+                    <h:outputLabel for="nome" value="Nome Completo:" />
+                    <p:inputText id="nome" value="" label="nome" style="width:300px" />
+
+                    <h:outputLabel for="email" value="Email:" />
+                    <p:inputText id="email" value="" label="email" style="width:300px" required="true" />
+
+                    <h:outputLabel for="login" value="Login:" />
+                    <h:outputText id="saidalogin" value="" />
+
+                    <h:outputLabel for="senha" value="Senha: *" />
+                    <p:password id="senha" value="#" label="senha" style="width:300px" required="true" />
+
+                    <p:outputLabel for="gestor" value="Gestor: " />
+                    <p:selectOneMenu id="gestor" value="#" style="width:150px" >
+                        <f:selectItem itemLabel="Selecione o gestor" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="Maro" itemValue="1" />
+                        <f:selectItem itemLabel="Tarcio" itemValue="2" />
+                        <f:selectItem itemLabel="Anderson" itemValue="3" />
+                        <f:selectItem itemLabel="Henrique" itemValue="4" />
+                        <f:selectItem itemLabel="Gerlan" itemValue="5" />
+                    </p:selectOneMenu>
+                    
+                    <h:outputLabel for="permissao" value="Permissão: "/>
+                    <h:selectManyCheckbox id="permissao" value="">
+                        <f:selectItem itemLabel="Tela 1" itemValue="Tela 1" />
+                        <f:selectItem itemLabel="Tela 2" itemValue="Tela 2" />
+                        <f:selectItem itemLabel="Tela 3" itemValue="Tela 3" />
+                        <f:selectItem itemLabel="Tela 4" itemValue="Tela 4" />
+                        <f:selectItem itemLabel="Tela 5" itemValue="Tela 5" />
+                    </h:selectManyCheckbox>
+
+                    <p:outputLabel for="oneBtn" value="Staus: " />
+                    <p:selectOneButton id="oneBtn">
+                        <f:selectItem itemLabel="Ativo" itemValue="On" />
+                        <f:selectItem itemLabel="Inativo" itemValue="Off" />
+                    </p:selectOneButton>
+
+                    <h:outputLabel for="comentario" value="Observação:" />
+                    <p:inputText id="comentario" value="" label="comentario" style="width:300px" />
+                    
+                    <p:commandButton value="Salvar" update="mensagens" actionListener="#" icon="ui-icon-check" />
+                    <p:commandButton value="Limpar" update="mensagens" actionListener="#" icon="ui-icon-cancel" />
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>

@@ -6,12 +6,9 @@
 package br.com.chamados.VO;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -19,9 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,31 +28,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "DocumentosChamado.findAll", query = "SELECT d FROM DocumentosChamado d"),
     @NamedQuery(name = "DocumentosChamado.findByDocumentosChamadosId", query = "SELECT d FROM DocumentosChamado d WHERE d.documentosChamadosId = :documentosChamadosId"),
-    @NamedQuery(name = "DocumentosChamado.findByDocumentosChamadosDesc", query = "SELECT d FROM DocumentosChamado d WHERE d.documentosChamadosDesc = :documentosChamadosDesc"),
-    @NamedQuery(name = "DocumentosChamado.findByDocumentosChamadoUsuarioCria", query = "SELECT d FROM DocumentosChamado d WHERE d.documentosChamadoUsuarioCria = :documentosChamadoUsuarioCria"),
-    @NamedQuery(name = "DocumentosChamado.findByDocumentosChamadoDataCriacao", query = "SELECT d FROM DocumentosChamado d WHERE d.documentosChamadoDataCriacao = :documentosChamadoDataCriacao")})
+    @NamedQuery(name = "DocumentosChamado.findByDocumentosChamadosDesc", query = "SELECT d FROM DocumentosChamado d WHERE d.documentosChamadosDesc = :documentosChamadosDesc")})
 public class DocumentosChamado implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "documentos_chamados_id")
     private Integer documentosChamadosId;
-    @Size(max = 100)
     @Column(name = "documentos_chamados_desc")
     private String documentosChamadosDesc;
     @Lob
     @Column(name = "documentos_chamado_doc")
     private byte[] documentosChamadoDoc;
-    @Size(max = 100)
-    @Column(name = "documentos_chamado_usuario_cria")
-    private String documentosChamadoUsuarioCria;
-    @Column(name = "documentos_chamado_data_criacao")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date documentosChamadoDataCriacao;
     @JoinColumn(name = "chamado_chamado_id", referencedColumnName = "chamado_id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Chamado chamadoChamadoId;
 
     public DocumentosChamado() {
@@ -90,22 +74,6 @@ public class DocumentosChamado implements Serializable {
 
     public void setDocumentosChamadoDoc(byte[] documentosChamadoDoc) {
         this.documentosChamadoDoc = documentosChamadoDoc;
-    }
-
-    public String getDocumentosChamadoUsuarioCria() {
-        return documentosChamadoUsuarioCria;
-    }
-
-    public void setDocumentosChamadoUsuarioCria(String documentosChamadoUsuarioCria) {
-        this.documentosChamadoUsuarioCria = documentosChamadoUsuarioCria;
-    }
-
-    public Date getDocumentosChamadoDataCriacao() {
-        return documentosChamadoDataCriacao;
-    }
-
-    public void setDocumentosChamadoDataCriacao(Date documentosChamadoDataCriacao) {
-        this.documentosChamadoDataCriacao = documentosChamadoDataCriacao;
     }
 
     public Chamado getChamadoChamadoId() {

@@ -7,7 +7,6 @@ package br.com.chamados.DAO;
 
 
 import br.com.chamados.VO.Chamado;
-import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -48,12 +47,12 @@ public class ChamadoDAO extends dao{
         
         try {
             
-//            em.getTransaction().begin();
-//            Chamado c = em.find(Chamado.class, chamado.getChamadoId());
-//            
-//            c.setChamadoCidade(chamado.getChamadoCidade());
-//            
-//            em.getTransaction().commit();
+            em.getTransaction().begin();
+            Chamado c = em.find(Chamado.class, chamado.getChamadoId());
+            
+            c.setChamadoCidade(chamado.getChamadoCidade());
+            
+            em.getTransaction().commit();
             
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ERRO",  e.getMessage()));
@@ -86,29 +85,12 @@ public class ChamadoDAO extends dao{
         
         try {
             
-            Query q =  em.createQuery("select object (c) from Chamado as c");
+            Query q =  em.createQuery("select object (u) from Chamado as u");
             lista = q.getResultList();
             
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ERRO",  e.getMessage()));
             em.close();
-        }
-        
-        return lista;
-    }
-    
-    public List<Chamado> GetData(Date data){
-        EntityManager em = getEntityManager();
-        List<Chamado> lista = null;
-        
-        try {
-            
-            Query q =  em.createQuery("select object (c) from Chamado as c where c.chamadoData = :data").setParameter("data", data);
-            lista = q.getResultList();
-            
-        } catch (Exception e) {
-            em.close();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ERRO",  e.getMessage()));
         }
         
         return lista;

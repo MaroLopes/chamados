@@ -6,7 +6,7 @@
 package br.com.chamados.VO;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +18,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -41,13 +40,12 @@ public class ModelRelat implements Serializable {
     @Basic(optional = false)
     @Column(name = "model_relat_id")
     private Integer modelRelatId;
-    @Size(max = 100)
     @Column(name = "model_relat_desc")
     private String modelRelatDesc;
-    @OneToMany(mappedBy = "modelRelatModelRelatId")
-    private List<Chamado> chamadoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "modelRelatModelRelatId")
-    private List<ModelRelatItens> modelRelatItensList;
+    private Collection<Chamado> chamadoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "modelRelatModelRelatId")
+    private Collection<ModelRelatItens> modelRelatItensCollection;
 
     public ModelRelat() {
     }
@@ -73,21 +71,21 @@ public class ModelRelat implements Serializable {
     }
 
     @XmlTransient
-    public List<Chamado> getChamadoList() {
-        return chamadoList;
+    public Collection<Chamado> getChamadoCollection() {
+        return chamadoCollection;
     }
 
-    public void setChamadoList(List<Chamado> chamadoList) {
-        this.chamadoList = chamadoList;
+    public void setChamadoCollection(Collection<Chamado> chamadoCollection) {
+        this.chamadoCollection = chamadoCollection;
     }
 
     @XmlTransient
-    public List<ModelRelatItens> getModelRelatItensList() {
-        return modelRelatItensList;
+    public Collection<ModelRelatItens> getModelRelatItensCollection() {
+        return modelRelatItensCollection;
     }
 
-    public void setModelRelatItensList(List<ModelRelatItens> modelRelatItensList) {
-        this.modelRelatItensList = modelRelatItensList;
+    public void setModelRelatItensCollection(Collection<ModelRelatItens> modelRelatItensCollection) {
+        this.modelRelatItensCollection = modelRelatItensCollection;
     }
 
     @Override

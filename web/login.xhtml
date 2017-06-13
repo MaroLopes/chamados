@@ -1,16 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>MTT | Login</title>
+    </h:head>
+
+    <h:body style="overflow-y: hidden;overflow-x: hidden;">
+        <h:form>
+            <p:growl id="mensagens" />
+            <p:panel id="login" header="Login" style="width:450px; text-align:center; margin:100px 500px" >
+                <h:panelGrid columns="2" cellpadding="8" style="font-weight:bold" >
+
+                    <p:outputLabel for="nome" value="Usuário: *" />
+                    <p:inputText id="nome" value="" />
+
+                    <p:outputLabel for="senha" value="Senha: *" />
+                    <p:password id="senha" value="" />
+
+                    <p:commandButton  value="Acessar" icon="ui-icon-check" 
+                                      actionListener="/home" update="">
+                    </p:commandButton>
+
+                    <p:link value="Esqueci minha senha" href="#telacodigo" />
+                </h:panelGrid>
+                <h:link outcome="home" value="Página de boas-vindas" />
+            </p:panel>
+
+        </h:form>
+
+        <div id="telacodigo">
+            <h:form>
+                <p:panel id="senhacodigo" header="Obter Código" style="width:350px; text-align:center; margin:800px 500px" >
+                     <h:panelGrid columns="1" cellpadding="8" style="font-weight:bold" >
+
+                         <p:outputLabel for="emailCodigo" value="Digite seu Email: *" />
+                        <p:inputText id="emailCodigo" value="" style="width:300px"/>
+
+                        <p:commandButton  value="Enviar Código" icon="ui-icon-check" actionListener="#alterarSenha" update=""></p:commandButton>
+                        <p:link value="Alterar Senha" href="#alterarSenha" />
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+
+            <div id="alterarSenha">
+                <h:form>
+                    <p:panel id="senhareset" header="Resetar Senha" style="width:270px; text-align:center; margin:1000px 600px" >
+                         <h:panelGrid columns="1" cellpadding="8" style="font-weight:bold" >
+
+                            <p:outputLabel for="codigo" value="Digite o código: *" />
+                            <p:inputText id="codigo" value="" style="width:200px"/>
+
+                            <p:outputLabel for="nova_senha" value="Nova senha: *" />
+                            <p:password id="nova_senha" value="" style="width:200px"/>
+
+                            <p:outputLabel for="regigite_senha" value="Redigite a senha: *" />
+                            <p:password id="regigite_senha" value="" style="width:200px"/>
+
+                            <p:commandButton  value="Alterar" icon="ui-icon-check" actionListener="/home" update=""></p:commandButton>
+                        </h:panelGrid>
+                        <h:link outcome="login" value="Página de boas-vindas" />
+                    </p:panel>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
 </html>
